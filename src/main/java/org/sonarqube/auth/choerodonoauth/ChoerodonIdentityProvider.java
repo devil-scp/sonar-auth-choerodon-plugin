@@ -112,19 +112,19 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
                 //创建群组
                 List<NameValuePair> createParameters = new ArrayList<>(0);
                 createParameters.add(new BasicNameValuePair(PAR_NAME, groupName));
-                connectionPoolUtil.doPost(sonarInfoDTO.getUrl() + API_CREATE_GROUP, sonarInfoDTO.getToken(), createParameters);
-
+                connectionPoolUtil.doPost(sonarInfoDTO.getUrl() + API_CREATE_GROUP, sonarInfoDTO, createParameters);
+                LOGGER.info("URL--------" + sonarInfoDTO.getUrl() + API_CREATE_GROUP);
                 //设置项目权限
                 List<NameValuePair> addParameters = new ArrayList<>(0);
                 addParameters.add(new BasicNameValuePair(PAR_PROJECT_KEY, groupName + ":" + projectName));
                 addParameters.add(new BasicNameValuePair(PAR_GROUP_NAME, groupName));
                 addParameters.add(new BasicNameValuePair(PAR_PERMISSION, PermissionType.USER.toValue()));
                 addParameters.add(new BasicNameValuePair(PAR_ORGANIZATION, "default-organization"));
-                connectionPoolUtil.doPost(sonarInfoDTO.getUrl() + API_ADD_GROUP, sonarInfoDTO.getToken(), addParameters);
+                connectionPoolUtil.doPost(sonarInfoDTO.getUrl() + API_ADD_GROUP, sonarInfoDTO, addParameters);
 
                 addParameters.remove(new BasicNameValuePair(PAR_PERMISSION, PermissionType.USER.toValue()));
                 addParameters.remove(new BasicNameValuePair(PAR_PERMISSION, PermissionType.SCAN.toValue()));
-                connectionPoolUtil.doPost(sonarInfoDTO.getUrl() + API_ADD_GROUP, sonarInfoDTO.getToken(), addParameters);
+                connectionPoolUtil.doPost(sonarInfoDTO.getUrl() + API_ADD_GROUP, sonarInfoDTO, addParameters);
                 queue.put(groupName);
             }
         } catch (Exception e) {
@@ -160,7 +160,7 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
         //获取原有组
         List<NameValuePair> valuePairs = new ArrayList<>();
         valuePairs.add(new BasicNameValuePair(PAR_LOING, gsonUser.getLoginName()));
-        JsonObject object = connectionPoolUtil.doGet(sonarInfoDTO.getUrl() + API_GET_GROUPS, sonarInfoDTO.getToken(), valuePairs);
+        JsonObject object = connectionPoolUtil.doGet(sonarInfoDTO.getUrl() + API_GET_GROUPS, sonarInfoDTO, valuePairs);
         if (object != null && object.get(PAR_GROUPS) != null) {
             for (JsonElement element : object.get(PAR_GROUPS).getAsJsonArray()) {
                 LOGGER.info("----" + element.toString());

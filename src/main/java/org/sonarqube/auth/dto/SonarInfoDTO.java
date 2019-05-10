@@ -6,20 +6,30 @@ package org.sonarqube.auth.dto;
  * Description:
  */
 public class SonarInfoDTO {
-    private String token;
+    private String userName;
+    private String password;
     private String url;
 
-    public SonarInfoDTO(String token, String url) {
-        this.token = token;
+    public SonarInfoDTO(String userName, String password, String url) {
+        this.userName = userName;
+        this.password = password;
         this.url = url;
     }
 
-    public String getToken() {
-        return token;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUrl() {

@@ -193,11 +193,11 @@ public class HttpConnectionPoolUtil {
      * @param params
      * @return
      */
-    public void doPost(String url, String token, List<NameValuePair> params) {
+    public void doPost(String url, SonarInfoDTO sonarInfoDTO, List<NameValuePair> params) {
         HttpPost httpPost = new HttpPost(url);
         CloseableHttpResponse response = null;
         try {
-            String encoding = DatatypeConverter.printBase64Binary((token + ":").getBytes(CHARSET));
+            String encoding = DatatypeConverter.printBase64Binary((sonarInfoDTO.getUserName() + ":" + sonarInfoDTO.getPassword()).getBytes(CHARSET));
             httpPost.setHeader("Authorization", "Basic " + encoding);
             setRequestConfig(httpPost);
             httpPost.setEntity(new UrlEncodedFormEntity(params, CHARSET));
@@ -209,7 +209,7 @@ public class HttpConnectionPoolUtil {
         }
     }
 
-    public JsonObject doGet(String url, String token, List<NameValuePair> pairs) {
+    public JsonObject doGet(String url, SonarInfoDTO sonarInfoDTO, List<NameValuePair> pairs) {
         CloseableHttpResponse response = null;
         InputStream in = null;
         JsonObject object = null;
@@ -217,7 +217,7 @@ public class HttpConnectionPoolUtil {
             URIBuilder builder = new URIBuilder(url);
             builder.setParameters(pairs);
             HttpGet get = new HttpGet(builder.build());
-            String encoding = DatatypeConverter.printBase64Binary((token + ":").getBytes(CHARSET));
+            String encoding = DatatypeConverter.printBase64Binary((sonarInfoDTO.getUserName() + ":" + sonarInfoDTO.getPassword()).getBytes(CHARSET));
             get.setHeader("Authorization", "Basic " + encoding);
             response = getHttpClient(url).execute(get);
             HttpEntity entity = response.getEntity();
