@@ -1,15 +1,14 @@
 package org.sonarqube.auth.choerodonoauth;
 
-import org.sonar.api.Plugin;
-import org.sonar.api.PropertyType;
-import org.sonar.api.config.PropertyDefinition;
+import static java.lang.String.valueOf;
+import static org.sonar.api.PropertyType.BOOLEAN;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.String.valueOf;
-import static org.sonar.api.PropertyType.BOOLEAN;
-import static org.sonar.api.PropertyType.SINGLE_SELECT_LIST;
+import org.sonar.api.Plugin;
+import org.sonar.api.PropertyType;
+import org.sonar.api.config.PropertyDefinition;
 
 /**
  * Creator: ChangpingShi0213@gmail.com
@@ -47,7 +46,7 @@ public class ChoerodonAuthPlugin implements Plugin {
                         .description("Allow new users to authenticate. When set to 'false', only existing users will be able to authenticate to the server.").category(CATEGORY)
                         .subCategory(SUBCATEGORY).type(BOOLEAN).defaultValue(valueOf(true)).index(5).build(),
                 PropertyDefinition.builder(CHOERODON_AUTH_SCOPE).name("choerodon access scope").description("Scope provided by choerodon when access user info.").category(CATEGORY).subCategory(SUBCATEGORY)
-                        .type(SINGLE_SELECT_LIST).options(NONE_SCOPE).defaultValue(NONE_SCOPE).index(6).build());
+                        .defaultValue(NONE_SCOPE).index(6).build());
     }
 
     @Override

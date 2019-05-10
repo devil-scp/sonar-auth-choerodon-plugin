@@ -1,5 +1,14 @@
 package org.sonarqube.auth.util;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InterruptedIOException;
+import java.net.UnknownHostException;
+import java.util.List;
+import javax.net.ssl.SSLException;
+import javax.net.ssl.SSLHandshakeException;
+import javax.xml.bind.DatatypeConverter;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.apache.commons.io.IOUtils;
@@ -31,17 +40,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonarqube.auth.dto.UserDTO;
-
-import javax.net.ssl.SSLException;
-import javax.net.ssl.SSLHandshakeException;
-import javax.xml.bind.DatatypeConverter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InterruptedIOException;
-import java.io.UnsupportedEncodingException;
-import java.net.UnknownHostException;
-import java.util.List;
+import org.sonarqube.auth.dto.SonarInfoDTO;
 
 
 /**
@@ -59,7 +58,6 @@ public class HttpConnectionPoolUtil {
     private static final String CHARSET = "UTF-8";
     private static CloseableHttpClient httpClient;
     private static PoolingHttpClientConnectionManager manager;
-    private UserDTO user;
 
     private static CloseableHttpClient getHttpClient(String url) {
         String hostName = url.split("/")[2];
@@ -195,41 +193,23 @@ public class HttpConnectionPoolUtil {
      * @param params
      * @return
      */
-    public JsonObject doPost(String url, List<NameValuePair> params) {
-
+    public void doPost(String url, String token, List<NameValuePair> params) {
         HttpPost httpPost = new HttpPost(url);
-        String encoding = null;
+        CloseableHttpResponse response = null;
         try {
-            encoding = DatatypeConverter.printBase64Binary((this.user.getUserName() + ":" + this.user.getPassword()).getBytes(CHARSET));
+            String encoding = DatatypeConverter.printBase64Binary((token + ":").getBytes(CHARSET));
             httpPost.setHeader("Authorization", "Basic " + encoding);
             setRequestConfig(httpPost);
             httpPost.setEntity(new UrlEncodedFormEntity(params, CHARSET));
-
-        } catch (UnsupportedEncodingException e) {
-            LOGGER.info(e.getMessage());
-        }
-
-        CloseableHttpResponse response = null;
-        InputStream in = null;
-        JsonObject object = null;
-        try {
             response = getHttpClient(url).execute(httpPost, HttpClientContext.create());
-            HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                in = entity.getContent();
-                String result = IOUtils.toString(in, CHARSET);
-                Gson gson = new Gson();
-                object = gson.fromJson(result, JsonObject.class);
-            }
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.info(e.getMessage());
         } finally {
-            closeResponse(in, response);
+            closeResponse(null, response);
         }
-        return object;
     }
 
-    public JsonObject doGet(String url, List<NameValuePair> pairs) {
+    public JsonObject doGet(String url, String token, List<NameValuePair> pairs) {
         CloseableHttpResponse response = null;
         InputStream in = null;
         JsonObject object = null;
@@ -237,7 +217,7 @@ public class HttpConnectionPoolUtil {
             URIBuilder builder = new URIBuilder(url);
             builder.setParameters(pairs);
             HttpGet get = new HttpGet(builder.build());
-            String encoding = DatatypeConverter.printBase64Binary((this.user.getUserName() + ":" + this.user.getPassword()).getBytes(CHARSET));
+            String encoding = DatatypeConverter.printBase64Binary((token + ":").getBytes(CHARSET));
             get.setHeader("Authorization", "Basic " + encoding);
             response = getHttpClient(url).execute(get);
             HttpEntity entity = response.getEntity();
@@ -248,32 +228,33 @@ public class HttpConnectionPoolUtil {
                 object = gson.fromJson(result, JsonObject.class);
             }
         } catch (Exception e) {
-            LOGGER.info(e.getMessage());
+            LOGGER.error(e.getMessage());
         } finally {
             closeResponse(in, response);
         }
         return object;
     }
 
-    public void setAdminUser(String url) {
-        this.user = new UserDTO("admin", "admin");
-//        CloseableHttpResponse response = null;
-//        InputStream in = null;
-//        try {
-//            URIBuilder builder = new URIBuilder(url);
-//            HttpGet get = new HttpGet(builder.build());
-//            response = getHttpClient(url).execute(get);
-//            HttpEntity entity = response.getEntity();
-//            if (entity != null) {
-//                in = entity.getContent();
-//                String result = IOUtils.toString(in, CHARSET);
-//                Gson gson = new Gson();
-//                this.user = gson.fromJson(result, UserDTO.class);
-//            }
-//        } catch (Exception e) {
-//            LOGGER.info(e.getMessage());
-//        } finally {
-//            closeResponse(in, response);
-//        }
+    public SonarInfoDTO getSonarInfo(String url) {
+        CloseableHttpResponse response = null;
+        InputStream in = null;
+        SonarInfoDTO sonarInfoDTO = null;
+        try {
+            URIBuilder builder = new URIBuilder(url);
+            HttpGet get = new HttpGet(builder.build());
+            response = getHttpClient(url).execute(get);
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                in = entity.getContent();
+                String result = IOUtils.toString(in, CHARSET);
+                Gson gson = new Gson();
+                sonarInfoDTO = gson.fromJson(result, SonarInfoDTO.class);
+            }
+        } catch (Exception e) {
+            LOGGER.info(e.getMessage());
+        } finally {
+            closeResponse(in, response);
+        }
+        return sonarInfoDTO;
     }
 }
