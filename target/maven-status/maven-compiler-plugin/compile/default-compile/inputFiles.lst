@@ -1,0 +1,10 @@
+D:\devops\sonar-auth-choerodon-plugin\src\main\java\org\sonarqube\auth\util\PermissionType.java
+D:\devops\sonar-auth-choerodon-plugin\src\main\java\org\sonarqube\auth\dto\GsonUser.java
+D:\devops\sonar-auth-choerodon-plugin\src\main\java\org\sonarqube\auth\dto\GroupDTO.java
+D:\devops\sonar-auth-choerodon-plugin\src\main\java\org\sonarqube\auth\dto\UserDTO.java
+D:\devops\sonar-auth-choerodon-plugin\src\main\java\org\sonarqube\auth\choerodonoauth\ChoerodonConfiguration.java
+D:\devops\sonar-auth-choerodon-plugin\src\main\java\org\sonarqube\auth\util\HttpConnectionPoolUtil.java
+D:\devops\sonar-auth-choerodon-plugin\src\main\java\org\sonarqube\auth\choerodonoauth\ChoerodonAuthPlugin.java
+D:\devops\sonar-auth-choerodon-plugin\src\main\java\org\sonarqube\auth\choerodonoauth\package-info.java
+D:\devops\sonar-auth-choerodon-plugin\src\main\java\org\sonarqube\auth\choerodonoauth\ChoerodonIdentityProvider.java
+D:\devops\sonar-auth-choerodon-plugin\src\main\java\org\sonarqube\auth\choerodonoauth\ChoerodonOAuthApi.java
