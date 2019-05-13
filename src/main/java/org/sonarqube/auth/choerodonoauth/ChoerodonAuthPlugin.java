@@ -22,6 +22,8 @@ public class ChoerodonAuthPlugin implements Plugin {
     public static final String CHOERODON_AUTH_SECRET = "sonar.auth.choerodon.secret";
     public static final String CHOERODON_AUTH_ALLOWUSERSTOSIGNUP = "sonar.auth.choerodon.allowUsersToSignUp";
     public static final String CHOERODON_AUTH_SCOPE = "sonar.auth.choerodon.scope";
+    public static final String CHOERODON_AUTH_SONAR_USERNAME = "sonar.auth.username";
+    public static final String CHOERODON_AUTH_SONAR_PASSWORD = "sonar.auth.password";
     public static final String CATEGORY = "Choerodon";
     public static final String SUBCATEGORY = "authentication";
 
@@ -43,7 +45,6 @@ public class ChoerodonAuthPlugin implements Plugin {
                         .description("URL to access choerodon.")
                         .category(CATEGORY)
                         .subCategory(SUBCATEGORY)
-                        .defaultValue("http://api.staging.saas.hand-china.com")
                         .index(2).build(),
                 PropertyDefinition
                         .builder(CHOERODON_AUTH_APPLICATIONID)
@@ -78,7 +79,23 @@ public class ChoerodonAuthPlugin implements Plugin {
                         .category(CATEGORY)
                         .subCategory(SUBCATEGORY)
                         .defaultValue(NONE_SCOPE)
-                        .index(6).build());
+                        .index(6).build(),
+               PropertyDefinition
+                        .builder(CHOERODON_AUTH_SONAR_USERNAME)
+                        .name("choerodon username")
+                        .description("choerodon username")
+                        .category(CATEGORY)
+                        .subCategory(SUBCATEGORY)
+                        .hidden()
+                        .index(7).build(),
+                PropertyDefinition
+                        .builder(CHOERODON_AUTH_SONAR_PASSWORD)
+                        .name("Administrator Password")
+                        .description("Please fill in the new password when you change Administrator password.")
+                        .category(CATEGORY)
+                        .subCategory(SUBCATEGORY)
+                        .type(PropertyType.PASSWORD)
+                        .index(8).build());
     }
 
     @Override

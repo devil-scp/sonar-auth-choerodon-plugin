@@ -43,6 +43,16 @@ public class ChoerodonConfiguration {
         return configuration.get(ChoerodonAuthPlugin.CHOERODON_AUTH_SCOPE).orElse(null);
     }
 
+    @CheckForNull
+    public String userName() {
+        return configuration.get(ChoerodonAuthPlugin.CHOERODON_AUTH_SONAR_USERNAME).orElse(null);
+    }
+
+    @CheckForNull
+    public String password() {
+        return configuration.get(ChoerodonAuthPlugin.CHOERODON_AUTH_SONAR_PASSWORD).orElse(null);
+    }
+
     public boolean isEnabled() {
         return configuration.getBoolean(ChoerodonAuthPlugin.CHOERODON_AUTH_ENABLED).orElse(false) && applicationId() != null && secret() != null;
     }

@@ -31,7 +31,6 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarqube.auth.dto.GroupDTO;
 import org.sonarqube.auth.dto.GsonUser;
-import org.sonarqube.auth.dto.SonarInfoDTO;
 import org.sonarqube.auth.util.HttpConnectionPoolUtil;
 import org.sonarqube.auth.util.PermissionType;
 
@@ -49,7 +48,6 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
     private static final String API_CREATE_GROUP = "api/user_groups/create";
     private static final String API_ADD_GROUP = "api/permissions/add_group";
     private static final String API_GET_GROUPS = "/api/users/groups";
-    private static final String API_SONAR = "/sonar/info";
     private static final String API_CALLBACK = "/oauth2/callback/choerodon";
     private static final String API_USER = "/iam/v1/users/self";
     private static final String PAR_NAME = "name";
@@ -59,6 +57,8 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
     private static final String PAR_ORGANIZATION = "organization";
     private static final String PAR_GROUPS = "groups";
     private static final String PAR_LOING = "login";
+    private static final String HTTP = "http://";
+    private static final String HTTPS = "https://";
     private static LinkedBlockingQueue queue = new LinkedBlockingQueue();
     private final ChoerodonConfiguration configuration;
 
@@ -95,10 +95,11 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
 
     @Override
     public void init(InitContext context) {
+        LOGGER.info("------------------------------------" + configuration.userName());
         //获取sonarToken
         HttpConnectionPoolUtil connectionPoolUtil = new HttpConnectionPoolUtil();
-        SonarInfoDTO sonarInfoDTO = connectionPoolUtil.getSonarInfo(configuration.url() + API_SONAR);
-        OAuthService scribe = prepareScribe(sonarInfoDTO.getUrl()).build();
+        String callbackUrl = changeCallBackUrl(context);
+        OAuthService scribe = prepareScribe(callbackUrl).build();
         String url = scribe.getAuthorizationUrl(EMPTY_TOKEN);
         try {
             //群组数据
@@ -112,19 +113,19 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
                 //创建群组
                 List<NameValuePair> createParameters = new ArrayList<>(0);
                 createParameters.add(new BasicNameValuePair(PAR_NAME, groupName));
-                connectionPoolUtil.doPost(sonarInfoDTO.getUrl() + API_CREATE_GROUP, sonarInfoDTO, createParameters);
-                LOGGER.info("URL--------" + sonarInfoDTO.getUrl() + API_CREATE_GROUP);
+                connectionPoolUtil.doPost(callbackUrl + API_CREATE_GROUP, configuration.userName(), configuration.password(), createParameters);
+                LOGGER.info("URL--------" + callbackUrl + API_CREATE_GROUP);
                 //设置项目权限
                 List<NameValuePair> addParameters = new ArrayList<>(0);
                 addParameters.add(new BasicNameValuePair(PAR_PROJECT_KEY, groupName + ":" + projectName));
                 addParameters.add(new BasicNameValuePair(PAR_GROUP_NAME, groupName));
                 addParameters.add(new BasicNameValuePair(PAR_PERMISSION, PermissionType.USER.toValue()));
                 addParameters.add(new BasicNameValuePair(PAR_ORGANIZATION, "default-organization"));
-                connectionPoolUtil.doPost(sonarInfoDTO.getUrl() + API_ADD_GROUP, sonarInfoDTO, addParameters);
+                connectionPoolUtil.doPost(callbackUrl + API_ADD_GROUP, configuration.userName(), configuration.password(), addParameters);
 
                 addParameters.remove(new BasicNameValuePair(PAR_PERMISSION, PermissionType.USER.toValue()));
                 addParameters.remove(new BasicNameValuePair(PAR_PERMISSION, PermissionType.SCAN.toValue()));
-                connectionPoolUtil.doPost(sonarInfoDTO.getUrl() + API_ADD_GROUP, sonarInfoDTO, addParameters);
+                connectionPoolUtil.doPost(callbackUrl + API_ADD_GROUP, configuration.userName(), configuration.password(), addParameters);
                 queue.put(groupName);
             }
         } catch (Exception e) {
@@ -138,9 +139,9 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
     public void callback(CallbackContext context) {
         //获取用户详情
         HttpConnectionPoolUtil connectionPoolUtil = new HttpConnectionPoolUtil();
-        SonarInfoDTO sonarInfoDTO = connectionPoolUtil.getSonarInfo(configuration.url() + API_SONAR);
         HttpServletRequest request = context.getRequest();
-        OAuthService scribe = prepareScribe(sonarInfoDTO.getUrl()).build();
+        String callbackUrl = changeCallBackUrl(context);
+        OAuthService scribe = prepareScribe(callbackUrl).build();
         String oAuthVerifier = request.getParameter("code");
         Token accessToken = scribe.getAccessToken(EMPTY_TOKEN, new Verifier(oAuthVerifier));
 
@@ -160,7 +161,7 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
         //获取原有组
         List<NameValuePair> valuePairs = new ArrayList<>();
         valuePairs.add(new BasicNameValuePair(PAR_LOING, gsonUser.getLoginName()));
-        JsonObject object = connectionPoolUtil.doGet(sonarInfoDTO.getUrl() + API_GET_GROUPS, sonarInfoDTO, valuePairs);
+        JsonObject object = connectionPoolUtil.doGet(callbackUrl + API_GET_GROUPS, configuration.userName(), configuration.password(), valuePairs);
         if (object != null && object.get(PAR_GROUPS) != null) {
             for (JsonElement element : object.get(PAR_GROUPS).getAsJsonArray()) {
                 LOGGER.info("----" + element.toString());
@@ -198,4 +199,18 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
         return serviceBuilder;
     }
 
+    /**
+     * 获取callbackUrl
+     *
+     * @param context
+     * @return
+     */
+    private String changeCallBackUrl(OAuth2IdentityProvider.OAuth2Context context) {
+        String referer = context.getRequest().getHeader("Referer");
+        String callBackUrl = context.getCallbackUrl();
+        if (referer.contains(HTTP) && callBackUrl.contains(HTTPS)) {
+            callBackUrl = callBackUrl.replaceAll(HTTPS, HTTP);
+        }
+        return callBackUrl;
+    }
 }
