@@ -3,6 +3,7 @@ package org.sonarqube.auth.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InterruptedIOException;
+import java.io.UnsupportedEncodingException;
 import java.net.UnknownHostException;
 import java.util.List;
 import javax.net.ssl.SSLException;
@@ -40,6 +41,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonarqube.auth.dto.UserDTO;
 
 
 /**
@@ -192,23 +194,41 @@ public class HttpConnectionPoolUtil {
      * @param params
      * @return
      */
-    public void doPost(String url, String userName, String password, List<NameValuePair> params) {
+    public JsonObject doPost(String url, List<NameValuePair> params, UserDTO userDTO) {
+
         HttpPost httpPost = new HttpPost(url);
-        CloseableHttpResponse response = null;
+        String encoding = null;
         try {
-            String encoding = DatatypeConverter.printBase64Binary((userName + ":" + password).getBytes(CHARSET));
+            encoding = DatatypeConverter.printBase64Binary((userDTO.getUserName() + ":" + userDTO.getPassword()).getBytes(CHARSET));
             httpPost.setHeader("Authorization", "Basic " + encoding);
             setRequestConfig(httpPost);
             httpPost.setEntity(new UrlEncodedFormEntity(params, CHARSET));
+
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.info(e.getMessage());
+        }
+
+        CloseableHttpResponse response = null;
+        InputStream in = null;
+        JsonObject object = null;
+        try {
             response = getHttpClient(url).execute(httpPost, HttpClientContext.create());
-        } catch (Exception e) {
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                in = entity.getContent();
+                String result = IOUtils.toString(in, CHARSET);
+                Gson gson = new Gson();
+                object = gson.fromJson(result, JsonObject.class);
+            }
+        } catch (IOException e) {
             LOGGER.info(e.getMessage());
         } finally {
-            closeResponse(null, response);
+            closeResponse(in, response);
         }
+        return object;
     }
 
-    public JsonObject doGet(String url, String userName, String password, List<NameValuePair> pairs) {
+    public JsonObject doGet(String url, List<NameValuePair> pairs, UserDTO userDTO) {
         CloseableHttpResponse response = null;
         InputStream in = null;
         JsonObject object = null;
@@ -216,7 +236,7 @@ public class HttpConnectionPoolUtil {
             URIBuilder builder = new URIBuilder(url);
             builder.setParameters(pairs);
             HttpGet get = new HttpGet(builder.build());
-            String encoding = DatatypeConverter.printBase64Binary((userName + ":" + password).getBytes(CHARSET));
+            String encoding = DatatypeConverter.printBase64Binary((userDTO.getUserName() + ":" + userDTO.getPassword()).getBytes(CHARSET));
             get.setHeader("Authorization", "Basic " + encoding);
             response = getHttpClient(url).execute(get);
             HttpEntity entity = response.getEntity();
@@ -227,7 +247,30 @@ public class HttpConnectionPoolUtil {
                 object = gson.fromJson(result, JsonObject.class);
             }
         } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.info(e.getMessage());
+        } finally {
+            closeResponse(in, response);
+        }
+        return object;
+    }
+
+    public UserDTO doSonarDTO(String url) {
+        CloseableHttpResponse response = null;
+        InputStream in = null;
+        UserDTO object = null;
+        try {
+            URIBuilder builder = new URIBuilder(url);
+            HttpGet get = new HttpGet(builder.build());
+            response = getHttpClient(url).execute(get);
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                in = entity.getContent();
+                String result = IOUtils.toString(in, CHARSET);
+                Gson gson = new Gson();
+                object = gson.fromJson(result, UserDTO.class);
+            }
+        } catch (Exception e) {
+            LOGGER.info(e.getMessage());
         } finally {
             closeResponse(in, response);
         }

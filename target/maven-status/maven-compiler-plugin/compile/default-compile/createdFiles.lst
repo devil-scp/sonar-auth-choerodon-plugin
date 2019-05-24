@@ -1,4 +1,5 @@
 org\sonarqube\auth\choerodonoauth\ChoerodonIdentityProvider.class
+org\sonarqube\auth\dto\UserDTO.class
 org\sonarqube\auth\dto\GroupDTO.class
 org\sonarqube\auth\dto\GsonUser.class
 org\sonarqube\auth\choerodonoauth\ChoerodonOAuthApi.class
