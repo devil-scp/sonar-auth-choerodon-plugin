@@ -29,17 +29,27 @@ public class ChoerodonAuthPlugin implements Plugin {
     public static final String NONE_SCOPE = "none";
 
     static List<PropertyDefinition> definitions() {
-        return Arrays.asList(PropertyDefinition.builder(CHOERODON_AUTH_ENABLED).name("Enabled").description("Enable choerodon users to login. Value is ignored if client ID and secret are not defined.")
-                        .category(CATEGORY).subCategory(SUBCATEGORY).type(BOOLEAN).defaultValue(valueOf(false)).index(1).build(),
-                PropertyDefinition.builder(CHOERODON_AUTH_URL).name("choerodon url").description("URL to access choerodon.").category(CATEGORY).subCategory(SUBCATEGORY).defaultValue("http://api.example.com")
+        return Arrays.asList(
+                PropertyDefinition.builder(CHOERODON_AUTH_ENABLED)
+                        .name("Enabled")
+                        .description("Enable choerodon users to login. Value is ignored if client ID and secret are not defined.")
+                        .category(CATEGORY)
+                        .subCategory(SUBCATEGORY)
+                        .type(BOOLEAN)
+                        .defaultValue(valueOf(false)).index(1).build(),
+                PropertyDefinition.builder(CHOERODON_AUTH_URL)
+                        .name("choerodon url")
+                        .description("URL to access choerodon.")
+                        .category(CATEGORY)
+                        .subCategory(SUBCATEGORY)
+                        .defaultValue("http://api.example.com")
                         .index(2).build(),
                 PropertyDefinition.builder(CHOERODON_AUTH_APPLICATIONID)
                         .name("Application ID").description("Application ID provided by choerodon when registering the application.")
                         .category(CATEGORY)
                         .defaultValue("sonar")
                         .subCategory(SUBCATEGORY).index(3).build(),
-                PropertyDefinition
-                        .builder(CHOERODON_AUTH_SECRET)
+                PropertyDefinition.builder(CHOERODON_AUTH_SECRET)
                         .name("Secret")
                         .description("Secret provided by choerodon when registering the application.")
                         .category(CATEGORY)
@@ -47,11 +57,20 @@ public class ChoerodonAuthPlugin implements Plugin {
                         .type(PropertyType.PASSWORD)
                         .defaultValue("sonarsonar")
                         .index(4).build(),
-                PropertyDefinition.builder(CHOERODON_AUTH_ALLOWUSERSTOSIGNUP).name("Allow users to sign-up")
-                        .description("Allow new users to authenticate. When set to 'false', only existing users will be able to authenticate to the server.").category(CATEGORY)
-                        .subCategory(SUBCATEGORY).type(BOOLEAN).defaultValue(valueOf(true)).index(5).build(),
-                PropertyDefinition.builder(CHOERODON_AUTH_SCOPE).name("choerodon access scope").description("Scope provided by choerodon when access user info.").category(CATEGORY).subCategory(SUBCATEGORY)
-                        .type(SINGLE_SELECT_LIST).options(NONE_SCOPE).defaultValue(NONE_SCOPE).index(6).build()
+                PropertyDefinition.builder(CHOERODON_AUTH_ALLOWUSERSTOSIGNUP)
+                        .name("Allow users to sign-up")
+                        .description("Allow new users to authenticate. When set to 'false', only existing users will be able to authenticate to the server.")
+                        .category(CATEGORY)
+                        .subCategory(SUBCATEGORY)
+                        .type(BOOLEAN)
+                        .defaultValue(valueOf(true)).index(5).build(),
+                PropertyDefinition.builder(CHOERODON_AUTH_SCOPE)
+                        .name("choerodon access scope")
+                        .description("Scope provided by choerodon when access user info.")
+                        .category(CATEGORY)
+                        .subCategory(SUBCATEGORY)
+                        .type(SINGLE_SELECT_LIST)
+                        .options(NONE_SCOPE).defaultValue(NONE_SCOPE).index(6).build()
         );
     }
 
