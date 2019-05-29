@@ -41,7 +41,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonarqube.auth.dto.UserDTO;
+import org.sonarqube.auth.dto.SonarInfo;
 
 
 /**
@@ -194,7 +194,7 @@ public class HttpConnectionPoolUtil {
      * @param params
      * @return
      */
-    public JsonObject doPost(String url, List<NameValuePair> params, UserDTO userDTO) {
+    public JsonObject doPost(String url, List<NameValuePair> params, SonarInfo userDTO) {
 
         HttpPost httpPost = new HttpPost(url);
         String encoding = null;
@@ -228,7 +228,7 @@ public class HttpConnectionPoolUtil {
         return object;
     }
 
-    public JsonObject doGet(String url, List<NameValuePair> pairs, UserDTO userDTO) {
+    public JsonObject doGet(String url, List<NameValuePair> pairs, SonarInfo userDTO) {
         CloseableHttpResponse response = null;
         InputStream in = null;
         JsonObject object = null;
@@ -254,10 +254,10 @@ public class HttpConnectionPoolUtil {
         return object;
     }
 
-    public UserDTO doSonarDTO(String url) {
+    public SonarInfo doSonarDTO(String url) {
         CloseableHttpResponse response = null;
         InputStream in = null;
-        UserDTO object = null;
+        SonarInfo object = null;
         try {
             URIBuilder builder = new URIBuilder(url);
             HttpGet get = new HttpGet(builder.build());
@@ -267,7 +267,7 @@ public class HttpConnectionPoolUtil {
                 in = entity.getContent();
                 String result = IOUtils.toString(in, CHARSET);
                 Gson gson = new Gson();
-                object = gson.fromJson(result, UserDTO.class);
+                object = gson.fromJson(result, SonarInfo.class);
             }
         } catch (Exception e) {
             LOGGER.info(e.getMessage());

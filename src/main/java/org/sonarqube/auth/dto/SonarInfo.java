@@ -5,13 +5,15 @@ package org.sonarqube.auth.dto;
  * Date:  15:42 2019/5/8
  * Description:
  */
-public class UserDTO {
+public class SonarInfo{
     private String userName;
     private String password;
+    private String url;
 
-    public UserDTO(String userName, String password) {
+    public SonarInfo(String userName, String password, String url) {
         this.userName = userName;
         this.password = password;
+        this.url = url;
     }
 
     public String getUserName() {
@@ -30,4 +32,11 @@ public class UserDTO {
         this.password = password;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

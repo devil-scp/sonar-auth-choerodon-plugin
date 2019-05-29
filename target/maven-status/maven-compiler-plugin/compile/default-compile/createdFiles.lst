@@ -1,9 +1,9 @@
 org\sonarqube\auth\choerodonoauth\ChoerodonIdentityProvider.class
-org\sonarqube\auth\dto\UserDTO.class
 org\sonarqube\auth\dto\GroupDTO.class
 org\sonarqube\auth\dto\GsonUser.class
 org\sonarqube\auth\choerodonoauth\ChoerodonOAuthApi.class
 org\sonarqube\auth\choerodonoauth\ChoerodonConfiguration.class
+org\sonarqube\auth\dto\SonarInfo.class
 org\sonarqube\auth\util\HttpConnectionPoolUtil.class
 org\sonarqube\auth\choerodonoauth\package-info.class
 org\sonarqube\auth\util\PermissionType.class

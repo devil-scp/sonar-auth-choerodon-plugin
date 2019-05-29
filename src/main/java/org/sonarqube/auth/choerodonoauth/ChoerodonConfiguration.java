@@ -4,7 +4,6 @@ import javax.annotation.CheckForNull;
 
 import org.sonar.api.config.Configuration;
 import org.sonar.api.server.ServerSide;
-import org.sonarqube.auth.dto.UserDTO;
 
 /**
  * Creator: ChangpingShi0213@gmail.com
@@ -38,17 +37,6 @@ public class ChoerodonConfiguration {
 
     public String scope() {
         return configuration.get(ChoerodonAuthPlugin.CHOERODON_AUTH_SCOPE).orElse(null);
-    }
-
-    public UserDTO getUser() {
-        String userName = configuration.get(ChoerodonAuthPlugin.CHOERODON_AUTH_ADMIN_USERNAME).orElse(null);
-        String password = configuration.get(ChoerodonAuthPlugin.CHOERODON_AUTH_ADMIN_PASSWORD).orElse(null);
-        return new UserDTO(userName, password);
-    }
-
-    @CheckForNull
-    public String getSonarUrl(){
-        return configuration.get(ChoerodonAuthPlugin.CHOERODON_AUTH_SONAR_URL).orElse(null);
     }
 
     public boolean isEnabled() {

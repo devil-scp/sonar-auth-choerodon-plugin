@@ -31,6 +31,7 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarqube.auth.dto.GroupDTO;
 import org.sonarqube.auth.dto.GsonUser;
+import org.sonarqube.auth.dto.SonarInfo;
 import org.sonarqube.auth.util.HttpConnectionPoolUtil;
 import org.sonarqube.auth.util.PermissionType;
 
@@ -45,9 +46,10 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
     private static final Gson gson = new Gson();
 
     private static final Token EMPTY_TOKEN = null;
-    private static final String API_CREATE_GROUP = "api/user_groups/create";
-    private static final String API_ADD_GROUP = "api/permissions/add_group";
+    private static final String API_CREATE_GROUP = "/api/user_groups/create";
+    private static final String API_ADD_GROUP = "/api/permissions/add_group";
     private static final String API_GET_GROUPS = "/api/users/groups";
+    private static final String API_GET_SONAR = "/devops/sonar/info";
     private static final String PAR_NAME = "name";
     private static final String PAR_PROJECT_KEY = "projectKey";
     private static final String PAR_GROUP_NAME = "groupName";
@@ -58,6 +60,7 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
     private static LinkedBlockingQueue queue = new LinkedBlockingQueue();
     private static HttpConnectionPoolUtil connectionPoolUtil = null;
     private final ChoerodonConfiguration configuration;
+    private SonarInfo sonarInfo = null;
 
     public ChoerodonIdentityProvider(ChoerodonConfiguration configuration) {
         this.configuration = configuration;
@@ -92,23 +95,21 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
 
     @Override
     public void init(InitContext context) {
-        String callBackUrl = configuration.getSonarUrl();
+        connectionPoolUtil = new HttpConnectionPoolUtil();
+        sonarInfo = connectionPoolUtil.doSonarDTO(configuration.url() + API_GET_SONAR);
+        String callBackUrl = sonarInfo.getUrl();
         OAuthService scribe = prepareScribe(callBackUrl).build();
         String url = scribe.getAuthorizationUrl(EMPTY_TOKEN);
         try {
-            connectionPoolUtil = new HttpConnectionPoolUtil();
             String queryStr = URLDecoder.decode(context.getRequest().getQueryString(), "UTF-8");
-            String groupName = StringUtils.substringBetween(queryStr, "id=", "%3A");
-            String projectName = StringUtils.substringAfterLast(queryStr, "%3A");
-            LOGGER.info("serverUrl------:" + callBackUrl);
-            LOGGER.info("queryStr------:" + queryStr);
-            LOGGER.info("groupName------:" + groupName);
-            LOGGER.info("projectName------:" + projectName);
+            queryStr=queryStr.replace("%3A",":");
+            String groupName = StringUtils.substringBetween(queryStr, "id=", ":");
+            String projectName = StringUtils.substringBetween(queryStr, ":","&");
             if (groupName != null && !groupName.isEmpty() && projectName != null && !projectName.isEmpty()) {
                 //创建群组
                 List<NameValuePair> createParameters = new ArrayList<>(0);
                 createParameters.add(new BasicNameValuePair(PAR_NAME, groupName));
-                connectionPoolUtil.doPost(callBackUrl + API_CREATE_GROUP, createParameters, configuration.getUser());
+                connectionPoolUtil.doPost(callBackUrl + API_CREATE_GROUP, createParameters, sonarInfo);
 
                 //设置项目权限
                 List<NameValuePair> addParameters = new ArrayList<>(0);
@@ -116,17 +117,18 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
                 addParameters.add(new BasicNameValuePair(PAR_GROUP_NAME, groupName));
                 addParameters.add(new BasicNameValuePair(PAR_PERMISSION, PermissionType.USER.toValue()));
                 addParameters.add(new BasicNameValuePair(PAR_ORGANIZATION, "default-organization"));
-                connectionPoolUtil.doPost(callBackUrl + API_ADD_GROUP, addParameters, configuration.getUser());
+                connectionPoolUtil.doPost(callBackUrl + API_ADD_GROUP, addParameters, sonarInfo);
 
                 addParameters.remove(new BasicNameValuePair(PAR_PERMISSION, PermissionType.USER.toValue()));
                 addParameters.add(new BasicNameValuePair(PAR_PERMISSION, PermissionType.SCAN.toValue()));
-                connectionPoolUtil.doPost(callBackUrl + API_ADD_GROUP, addParameters, configuration.getUser());
+                connectionPoolUtil.doPost(callBackUrl + API_ADD_GROUP, addParameters, sonarInfo);
 
                 addParameters.remove(new BasicNameValuePair(PAR_PERMISSION, PermissionType.SCAN.toValue()));
                 addParameters.add(new BasicNameValuePair(PAR_PERMISSION, PermissionType.CODEVIEWER.toValue()));
-                connectionPoolUtil.doPost(callBackUrl + API_ADD_GROUP, addParameters, configuration.getUser());
+                connectionPoolUtil.doPost(callBackUrl + API_ADD_GROUP, addParameters, sonarInfo);
                 queue.put(groupName);
             }
+
         } catch (Exception e) {
             if (connectionPoolUtil != null) connectionPoolUtil.closeConnectionPool();
             LOGGER.error(e.getMessage());
@@ -137,7 +139,7 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
     @Override
     public void callback(CallbackContext context) {
         //获取用户详情
-        String callBackUrl = configuration.getSonarUrl();
+        String callBackUrl = sonarInfo.getUrl();
         HttpServletRequest request = context.getRequest();
         OAuthService scribe = prepareScribe(callBackUrl).build();
         String oAuthVerifier = request.getParameter("code");
@@ -156,18 +158,17 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
         Set<String> groups = new HashSet<>();
 
         //获取原有组
-        connectionPoolUtil = new HttpConnectionPoolUtil();
         List<NameValuePair> valuePairs = new ArrayList<>();
         valuePairs.add(new BasicNameValuePair(PAR_LOING, gsonUser.getLoginName()));
         String serverUrl = StringUtils.substringBefore(callBackUrl, "oauth2");
-        JsonObject object = connectionPoolUtil.doGet(serverUrl + API_GET_GROUPS, valuePairs, configuration.getUser());
+        JsonObject object = connectionPoolUtil.doGet(serverUrl + API_GET_GROUPS, valuePairs, sonarInfo);
         if (object != null && object.get(PAR_GROUPS) != null) {
             for (JsonElement element : object.get(PAR_GROUPS).getAsJsonArray()) {
                 LOGGER.info("----" + element.toString());
                 groups.add(gson.fromJson(element, GroupDTO.class).getName());
             }
         }
-        connectionPoolUtil.closeConnectionPool();
+        if (connectionPoolUtil != null) connectionPoolUtil.closeConnectionPool();
         //设置当前组
         try {
             if (queue.size() > 0) {
