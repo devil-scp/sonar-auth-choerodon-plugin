@@ -42,7 +42,7 @@ public class ChoerodonAuthPlugin implements Plugin {
                         .description("URL to access choerodon.")
                         .category(CATEGORY)
                         .subCategory(SUBCATEGORY)
-                        .defaultValue("http://api.example.com")
+                        .defaultValue("http://api.example.choerodon.io")
                         .index(2).build(),
                 PropertyDefinition.builder(CHOERODON_AUTH_APPLICATIONID)
                         .name("Application ID").description("Application ID provided by choerodon when registering the application.")

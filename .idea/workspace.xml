@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a379bb9-86e6-426e-96a9-b19d810b4139" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonAuthPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonAuthPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonIdentityProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonIdentityProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/sonarqube/auth/choerodonoauth/ChoerodonAuthPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/sonarqube/auth/choerodonoauth/ChoerodonAuthPlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/sonarqube/auth/choerodonoauth/ChoerodonIdentityProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/sonarqube/auth/choerodonoauth/ChoerodonIdentityProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/sonar-auth-choerodonoauth-plugin-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/sonar-auth-choerodonoauth-plugin-1.0-SNAPSHOT/META-INF/lib/commons-codec-1.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/sonar-auth-choerodonoauth-plugin-1.0-SNAPSHOT/META-INF/lib/commons-io-2.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/sonar-auth-choerodonoauth-plugin-1.0-SNAPSHOT/META-INF/lib/commons-lang-2.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/sonar-auth-choerodonoauth-plugin-1.0-SNAPSHOT/META-INF/lib/gson-2.3.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/sonar-auth-choerodonoauth-plugin-1.0-SNAPSHOT/META-INF/lib/httpclient-4.5.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/sonar-auth-choerodonoauth-plugin-1.0-SNAPSHOT/META-INF/lib/httpcore-4.4.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/sonar-auth-choerodonoauth-plugin-1.0-SNAPSHOT/META-INF/lib/jackson-annotations-2.4.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/sonar-auth-choerodonoauth-plugin-1.0-SNAPSHOT/META-INF/lib/scribejava-apis-2.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/sonar-auth-choerodonoauth-plugin-1.0-SNAPSHOT/META-INF/lib/scribejava-core-2.1.0.jar" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -25,18 +41,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ChoerodonIdentityProvider.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ChoerodonIdentityProvider.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonIdentityProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="48" column="55" lean-forward="true" selection-start-line="48" selection-start-column="55" selection-end-line="48" selection-end-column="55" />
+            <state relative-caret-position="508">
+              <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="docComment;class#ChoerodonIdentityProvider#0" />
-                <element signature="e#3334#3335#0" expanded="true" />
-                <element signature="e#3382#3383#0" expanded="true" />
-                <element signature="e#3440#3441#0" expanded="true" />
-                <element signature="e#3497#3498#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1080">
+              <caret line="72" column="26" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -44,8 +66,8 @@
       <file leaf-file-name="ServiceBuilder.class" pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/com/github/scribejava/scribejava-core/2.1.0/scribejava-core-2.1.0.jar!/com/github/scribejava/core/builder/ServiceBuilder.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="5" column="29" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="29" />
+            <state relative-caret-position="90">
+              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -59,13 +81,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChoerodonAuthPlugin.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChoerodonAuthPlugin.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonAuthPlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+            <state relative-caret-position="465">
+              <caret line="44" column="72" lean-forward="true" selection-start-line="44" selection-start-column="72" selection-end-line="44" selection-end-column="72" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="docComment;class#ChoerodonAuthPlugin#0" />
               </folding>
             </state>
           </provider>
@@ -74,8 +96,12 @@
       <file leaf-file-name="ChoerodonConfiguration.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonConfiguration.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="120">
+              <caret line="15" column="45" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="45" />
+              <folding>
+                <element signature="docComment;class#ChoerodonConfiguration#0" />
+                <element signature="method#isEnabled#0;class#ChoerodonConfiguration#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,8 +109,28 @@
       <file leaf-file-name="ChoerodonOAuthApi.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonOAuthApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="26" column="18" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="18" />
+            <state relative-caret-position="299">
+              <caret line="40" column="58" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
+              <folding>
+                <element signature="docComment;class#ChoerodonOAuthApi#0" />
+                <element signature="method#ChoerodonOAuthApi#0;class#ChoerodonOAuthApi#0" />
+                <element signature="e#768#769#0" expanded="true" />
+                <element signature="e#817#818#0" expanded="true" />
+                <element signature="e#871#872#0" expanded="true" />
+                <element signature="e#903#904#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HttpConnectionPoolUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/util/HttpConnectionPoolUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1801">
+              <caret line="208" column="9" lean-forward="true" selection-start-line="208" selection-start-column="9" selection-end-line="208" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,9 +156,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>/static</find>
-      <find>IOU</find>
-      <find>iconPath</find>
       <find>secret</find>
       <find>CATEGORY</find>
       <find>https</find>
@@ -140,6 +183,9 @@
       <find>API_CREATE_GROUP</find>
       <find>API_GET_GROUPS</find>
       <find>PAR_PROJECT_KEY</find>
+      <find>LOGGER</find>
+      <find>4.5.2</find>
+      <find>SSLConnectionSocketFactory</find>
     </findStrings>
     <replaceStrings>
       <replace>LOGGER</replace>
@@ -172,7 +218,6 @@
         <option value="$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/package-info.java" />
         <option value="$PROJECT_DIR$/src/main/resources/org/sonar/l10n/authgitlab.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/org/sonar/l10n/authchoerodon.properties" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/sonarqube/auth/dto/ProjectDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sonarqube/auth/dto/GroupDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sonarqube/auth/util/HttpConnectionPoolUtil.java" />
@@ -181,6 +226,7 @@
         <option value="$PROJECT_DIR$/src/main/java/org/sonarqube/auth/dto/SonarInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonIdentityProvider.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonAuthPlugin.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -229,8 +275,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -297,73 +341,37 @@
             <path>
               <item name="sonar-auth-choerodon-plugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="sonar-auth-choerodon-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="org" type="462c0819:PsiDirectoryNode" />
+              <item name="sonarqube" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonar-auth-choerodon-plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonar-auth-choerodon-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sonar-auth-choerodon-plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sonar-auth-choerodon-plugin" type="462c0819:PsiDirectoryNode" />
               <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sonar-auth-choerodon-plugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
-            <path>
-              <item name="sonar-auth-choerodon-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.sonarsource.sonarqube:sonar-plugin-api:6.7.1" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="sonar-auth-choerodon-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.sonarsource.sonarqube:sonar-plugin-api:6.7.1" type="70bed36:NamedLibraryElementNode" />
-              <item name="sonar-plugin-api-6.7.1.jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sonar-auth-choerodon-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.sonarsource.sonarqube:sonar-plugin-api:6.7.1" type="70bed36:NamedLibraryElementNode" />
-              <item name="sonar-plugin-api-6.7.1.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sonar-auth-choerodon-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.sonarsource.sonarqube:sonar-plugin-api:6.7.1" type="70bed36:NamedLibraryElementNode" />
-              <item name="sonar-plugin-api-6.7.1.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="sonar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sonar-auth-choerodon-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.sonarsource.sonarqube:sonar-plugin-api:6.7.1" type="70bed36:NamedLibraryElementNode" />
-              <item name="sonar-plugin-api-6.7.1.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="sonar" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sonar-auth-choerodon-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.sonarsource.sonarqube:sonar-plugin-api:6.7.1" type="70bed36:NamedLibraryElementNode" />
-              <item name="sonar-plugin-api-6.7.1.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="sonar" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="batch" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sonar-auth-choerodon-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="Maven: org.sonarsource.sonarqube:sonar-plugin-api:6.7.1" type="70bed36:NamedLibraryElementNode" />
-              <item name="sonar-plugin-api-6.7.1.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="sonar" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="batch" type="462c0819:PsiDirectoryNode" />
-              <item name="rule" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -375,7 +383,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="SonarLintApp" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -474,12 +482,15 @@
       <workItem from="1558690585807" duration="642000" />
       <workItem from="1558955219993" duration="4377000" />
       <workItem from="1559053284011" duration="3272000" />
-      <workItem from="1559102232859" duration="2502000" />
+      <workItem from="1559102232859" duration="5706000" />
+      <workItem from="1559187038284" duration="980000" />
+      <workItem from="1559188779391" duration="1531000" />
+      <workItem from="1560913794442" duration="2284000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163571000" />
+    <option name="totallyTimeSpent" value="171570000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -492,7 +503,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="6" />
       <window_info anchor="bottom" id="TODO" order="15" weight="0.56198347" />
@@ -505,10 +515,10 @@
       <window_info anchor="bottom" id="Version Control" order="14" weight="0.23140496" />
       <window_info anchor="bottom" id="Run" order="9" weight="0.5338843" />
       <window_info anchor="bottom" id="CheckStyle" order="4" weight="0.47768596" />
-      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49394855" weight="0.31570247" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49394855" weight="0.3371901" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="0" />
-      <window_info content_ui="combo" id="Project" order="7" sideWeight="0.49507388" weight="0.35552195" />
+      <window_info active="true" content_ui="combo" id="Project" order="7" sideWeight="0.49507388" visible="true" weight="0.39183056" />
       <window_info anchor="bottom" id="SonarLint" order="5" />
       <window_info anchor="right" id="Database" order="9" side_tool="true" weight="0.32980332" />
       <window_info anchor="right" id="BPMNPalette" order="11" />
@@ -545,7 +555,7 @@
       <window_info id="UI Designer" order="2" />
       <window_info id="Web" order="4" side_tool="true" />
       <window_info id="Favorites" order="3" sideWeight="0.5049261" side_tool="true" weight="0.34568834" />
-      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49394855" weight="0.31570247" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49394855" weight="0.3371901" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="2" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
@@ -560,7 +570,7 @@
       <window_info anchor="bottom" id="Version Control" order="14" weight="0.23140496" />
       <window_info anchor="right" id="Maven Projects" order="0" weight="0.32980332" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.44224423" />
-      <window_info active="true" content_ui="combo" id="Project" order="7" sideWeight="0.49507388" visible="true" weight="0.35552195" />
+      <window_info active="true" content_ui="combo" id="Project" order="7" sideWeight="0.49507388" visible="true" weight="0.39183056" />
       <window_info anchor="right" id="Database" order="9" side_tool="true" weight="0.32980332" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="TODO" order="15" weight="0.56198347" />
@@ -580,7 +590,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonIdentityProvider.java</url>
+          <line>127</line>
+          <properties />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="15" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -773,13 +791,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/util/HttpConnectionPoolUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="222" column="33" selection-start-line="222" selection-start-column="33" selection-end-line="222" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/util/PermissionType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -794,13 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="22" column="20" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -869,45 +873,71 @@
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/github/scribejava/scribejava-core/2.1.0/scribejava-core-2.1.0.jar!/com/github/scribejava/core/builder/ServiceBuilder.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="5" column="29" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="29" />
+        <state relative-caret-position="90">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonIdentityProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="48" column="55" lean-forward="true" selection-start-line="48" selection-start-column="55" selection-end-line="48" selection-end-column="55" />
+        <state relative-caret-position="120">
+          <caret line="15" column="45" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="45" />
           <folding>
-            <element signature="docComment;class#ChoerodonIdentityProvider#0" />
-            <element signature="e#3334#3335#0" expanded="true" />
-            <element signature="e#3382#3383#0" expanded="true" />
-            <element signature="e#3440#3441#0" expanded="true" />
-            <element signature="e#3497#3498#0" expanded="true" />
+            <element signature="docComment;class#ChoerodonConfiguration#0" />
+            <element signature="method#isEnabled#0;class#ChoerodonConfiguration#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonOAuthApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="26" column="18" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="18" />
+        <state relative-caret-position="299">
+          <caret line="40" column="58" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
+          <folding>
+            <element signature="docComment;class#ChoerodonOAuthApi#0" />
+            <element signature="method#ChoerodonOAuthApi#0;class#ChoerodonOAuthApi#0" />
+            <element signature="e#768#769#0" expanded="true" />
+            <element signature="e#817#818#0" expanded="true" />
+            <element signature="e#871#872#0" expanded="true" />
+            <element signature="e#903#904#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="72" column="26" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/util/HttpConnectionPoolUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1801">
+          <caret line="208" column="9" lean-forward="true" selection-start-line="208" selection-start-column="9" selection-end-line="208" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonAuthPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+        <state relative-caret-position="465">
+          <caret line="44" column="72" lean-forward="true" selection-start-line="44" selection-start-column="72" selection-end-line="44" selection-end-column="72" />
+          <folding>
+            <element signature="docComment;class#ChoerodonAuthPlugin#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sonarqube/auth/choerodonoauth/ChoerodonIdentityProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="124" lean-forward="true" selection-start-line="124" selection-end-line="124" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="docComment;class#ChoerodonIdentityProvider#0" />
           </folding>
         </state>
       </provider>

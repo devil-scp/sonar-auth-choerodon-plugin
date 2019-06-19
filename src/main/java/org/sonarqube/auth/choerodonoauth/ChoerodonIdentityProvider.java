@@ -102,9 +102,9 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
         String url = scribe.getAuthorizationUrl(EMPTY_TOKEN);
         try {
             String queryStr = URLDecoder.decode(context.getRequest().getQueryString(), "UTF-8");
-            queryStr=queryStr.replace("%3A",":");
+            queryStr = queryStr.replace("%3A", ":");
             String groupName = StringUtils.substringBetween(queryStr, "id=", ":");
-            String projectName = StringUtils.substringBetween(queryStr, ":","&");
+            String projectName = StringUtils.substringBetween(queryStr, ":", "&");
             if (groupName != null && !groupName.isEmpty() && projectName != null && !projectName.isEmpty()) {
                 //创建群组
                 List<NameValuePair> createParameters = new ArrayList<>(0);
@@ -164,7 +164,6 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
         JsonObject object = connectionPoolUtil.doGet(serverUrl + API_GET_GROUPS, valuePairs, sonarInfo);
         if (object != null && object.get(PAR_GROUPS) != null) {
             for (JsonElement element : object.get(PAR_GROUPS).getAsJsonArray()) {
-                LOGGER.info("----" + element.toString());
                 groups.add(gson.fromJson(element, GroupDTO.class).getName());
             }
         }
