@@ -23,6 +23,9 @@ public class ChoerodonAuthPlugin implements Plugin {
     public static final String CHOERODON_AUTH_SECRET = "sonar.auth.choerodon.secret";
     public static final String CHOERODON_AUTH_ALLOWUSERSTOSIGNUP = "sonar.auth.choerodon.allowUsersToSignUp";
     public static final String CHOERODON_AUTH_SCOPE = "sonar.auth.choerodon.scope";
+    public static final String CHOERODON_SONAR_URL = "sonar.url";
+    public static final String CHOERODON_SONAR_USERNAME = "sonar.username";
+    public static final String CHOERODON_SONAR_PASSWORD = "sonar.password";
     public static final String CATEGORY = "Choerodon";
     public static final String SUBCATEGORY = "authentication";
 
@@ -57,20 +60,41 @@ public class ChoerodonAuthPlugin implements Plugin {
                         .type(PropertyType.PASSWORD)
                         .defaultValue("sonarsonar")
                         .index(4).build(),
+                PropertyDefinition.builder(CHOERODON_SONAR_URL)
+                        .name("sonar url")
+                        .description("sonar url")
+                        .category(CATEGORY)
+                        .subCategory(SUBCATEGORY)
+                        .index(5).build(),
+                PropertyDefinition.builder(CHOERODON_SONAR_USERNAME)
+                        .name("Administrator")
+                        .description("Administrator Username")
+                        .category(CATEGORY)
+                        .subCategory(SUBCATEGORY)
+                        .defaultValue("admin")
+                        .index(6).build(),
+                PropertyDefinition.builder(CHOERODON_SONAR_PASSWORD)
+                        .name("Administrator Password")
+                        .description("Administrator Password")
+                        .category(CATEGORY)
+                        .subCategory(SUBCATEGORY)
+                        .defaultValue("admin")
+                        .type(PropertyType.PASSWORD)
+                        .index(7).build(),
                 PropertyDefinition.builder(CHOERODON_AUTH_ALLOWUSERSTOSIGNUP)
                         .name("Allow users to sign-up")
                         .description("Allow new users to authenticate. When set to 'false', only existing users will be able to authenticate to the server.")
                         .category(CATEGORY)
                         .subCategory(SUBCATEGORY)
                         .type(BOOLEAN)
-                        .defaultValue(valueOf(true)).index(5).build(),
+                        .defaultValue(valueOf(true)).index(8).build(),
                 PropertyDefinition.builder(CHOERODON_AUTH_SCOPE)
                         .name("choerodon access scope")
                         .description("Scope provided by choerodon when access user info.")
                         .category(CATEGORY)
                         .subCategory(SUBCATEGORY)
                         .type(SINGLE_SELECT_LIST)
-                        .options(NONE_SCOPE).defaultValue(NONE_SCOPE).index(6).build()
+                        .options(NONE_SCOPE).defaultValue(NONE_SCOPE).index(9).build()
         );
     }
 

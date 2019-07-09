@@ -7,13 +7,13 @@
     <groupId>org.sonarsource.plugins.choerodon</groupId>
     <artifactId>sonar-auth-choerodonoauth-plugin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>1.0-RELEASE</version>
+    <version>1.3-RELEASE</version>
     <name>Choerodon Plugin for SonarQube 6.7.x LTS</name>
     <description>Choerodon of Plugin for SonarQube: Foo Language, FooLint, Custom Metrics and MeasureComputers</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.apiVersion>6.7.1</sonar.apiVersion>
+        <sonar.apiVersion>7.6</sonar.apiVersion>
         <jdk.min.version>1.8</jdk.min.version>
         <sonar.sources>src/main/java,src/main/js</sonar.sources>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>

@@ -97,6 +97,9 @@ public class ChoerodonIdentityProvider implements OAuth2IdentityProvider {
     public void init(InitContext context) {
         connectionPoolUtil = new HttpConnectionPoolUtil();
         sonarInfo = connectionPoolUtil.doSonarDTO(configuration.url() + API_GET_SONAR);
+        if (sonarInfo == null || sonarInfo.getUrl().equals("")) {
+            sonarInfo = new SonarInfo(configuration.sonarUsername(), configuration.sonarPassword(), configuration.sonarUrl());
+        }
         String callBackUrl = sonarInfo.getUrl();
         OAuthService scribe = prepareScribe(callBackUrl).build();
         String url = scribe.getAuthorizationUrl(EMPTY_TOKEN);

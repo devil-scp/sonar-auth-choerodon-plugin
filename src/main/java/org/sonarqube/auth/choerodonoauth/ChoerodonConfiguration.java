@@ -35,6 +35,21 @@ public class ChoerodonConfiguration {
         return configuration.get(ChoerodonAuthPlugin.CHOERODON_AUTH_SECRET).orElse(null);
     }
 
+    @CheckForNull
+    public String sonarUrl() {
+        return configuration.get(ChoerodonAuthPlugin.CHOERODON_SONAR_URL).orElse(null);
+    }
+
+    @CheckForNull
+    public String sonarUsername() {
+        return configuration.get(ChoerodonAuthPlugin.CHOERODON_SONAR_USERNAME).orElse(null);
+    }
+
+    @CheckForNull
+    public String sonarPassword() {
+        return configuration.get(ChoerodonAuthPlugin.CHOERODON_SONAR_PASSWORD).orElse(null);
+    }
+
     public String scope() {
         return configuration.get(ChoerodonAuthPlugin.CHOERODON_AUTH_SCOPE).orElse(null);
     }
